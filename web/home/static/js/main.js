@@ -3,3 +3,10 @@ function pop(){
     window.alert('Hello');
     
 }
+
+
+function signup(){
+
+    let x = document.getElementById('uname').value;
+    let y = document.getElementById('pass').value;
+}
