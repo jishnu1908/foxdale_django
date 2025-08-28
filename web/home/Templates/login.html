@@ -11,7 +11,7 @@
 </head>
 <body>
 
-<div class="m-3 p-2 ">
+<div class="m-3 p-5 shadow-lg rounded-4 " style="height: 645px;">
     <form>
     <div class="row mb-3">
         <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
@@ -33,6 +33,9 @@
             <label class="form-check-label" for="gridCheck1">
             Example checkbox
             </label>
+            <div>
+                <p>New user? <a href="{% url 'register' %}">Register here</a></p>
+            </div>
         </div>
         </div>
     </div>
