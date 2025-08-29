@@ -23,6 +23,6 @@ urlpatterns = [
     path('dash_main/', views.dash_main, name='dash_main'),
     path('dash_form/', views.dash_form, name='dash_form'),
     path('dash_index/', views.dash_index, name='dash_index'),
-    path('dash_table', views.dash_table, name='dash_table'),
+    path('dash_table/', views.dash_table, name='dash_table'),
     path('dash_login/', views.dash_login, name='dash_login')
 ]

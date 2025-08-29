@@ -33,10 +33,10 @@
 								</div>
 							</li>
 							<li class="nav-item">
-								<a href="form.html" class="nav-link"><i class="mdi mdi-lead-pencil"></i> Form</a>
+								<a href="{% url 'dash_form' %}" class="nav-link"><i class="mdi mdi-lead-pencil"></i> Form</a>
 							</li>
 							<li class="nav-item">
-								<a href="table.html" class="nav-link"><i class="mdi mdi-table"></i> Data Table <button class="btn btn-dark-base btn-rounded float-right btn-sm"><i class="mdi mdi-plus"></i></button></a>
+								<a href="{% url 'dash_table' %}" class="nav-link"><i class="mdi mdi-table"></i> Data Table <button class="btn btn-dark-base btn-rounded float-right btn-sm"><i class="mdi mdi-plus"></i></button></a>
 							</li>
 						</ul>
 					</div>
@@ -45,7 +45,7 @@
 							<li class="nav-item"><a href="{% url 'dash_login' %}" class="nav-link"><i class="mdi mdi-account"></i></a></li>
 							<li class="nav-item"><a href="#" class="nav-link"><i class="mdi mdi-message"></i></a></li>
 							<li class="nav-item"><a href="#" class="nav-link"><i class="mdi mdi-bell"></i></a></li>
-							<li class="nav-item"><a href="#" class="nav-link"><i class="mdi mdi-power"></i></a></li>
+							<li class="nav-item"><a href="{% url 'welcome' %}" class="nav-link"><i class="mdi mdi-power"></i></a></li>
 						</ul>
 					</div>
 				</div>
