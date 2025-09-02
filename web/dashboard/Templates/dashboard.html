@@ -20,7 +20,7 @@
 					<div class="sidebar-sticky">
 						<ul class="nav flex-column">
 							<li class="nav-item">
-								<a href="{% url 'dash_main'%}" class="nav-link active"><i class="mdi mdi-monitor"></i> Dashboard</a>
+								<a href="{% url 'dashapp:dash_main'%}" class="nav-link active"><i class="mdi mdi-monitor"></i> Dashboard</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="mdi mdi-shape-outline"></i> UI Components <span class="badge badge-info">New</span><i class="mdi mdi-chevron-down float-right pr-2"></i></a>
@@ -33,19 +33,19 @@
 								</div>
 							</li>
 							<li class="nav-item">
-								<a href="{% url 'dash_form' %}" class="nav-link"><i class="mdi mdi-lead-pencil"></i> Form</a>
+								<a href="{% url 'dashapp:dash_form' %}" class="nav-link"><i class="mdi mdi-lead-pencil"></i> Form</a>
 							</li>
 							<li class="nav-item">
-								<a href="{% url 'dash_table' %}" class="nav-link"><i class="mdi mdi-table"></i> Data Table <button class="btn btn-dark-base btn-rounded float-right btn-sm"><i class="mdi mdi-plus"></i></button></a>
+								<a href="{% url 'dashapp:dash_table' %}" class="nav-link"><i class="mdi mdi-table"></i> Data Table <button class="btn btn-dark-base btn-rounded float-right btn-sm"><i class="mdi mdi-plus"></i></button></a>
 							</li>
 						</ul>
 					</div>
 					<div class="nav-bottom">
 						<ul class="nav">
-							<li class="nav-item"><a href="{% url 'dash_login' %}" class="nav-link"><i class="mdi mdi-account"></i></a></li>
+							<li class="nav-item"><a href="{% url 'dashapp:dash_login' %}" class="nav-link"><i class="mdi mdi-account"></i></a></li>
 							<li class="nav-item"><a href="#" class="nav-link"><i class="mdi mdi-message"></i></a></li>
 							<li class="nav-item"><a href="#" class="nav-link"><i class="mdi mdi-bell"></i></a></li>
-							<li class="nav-item"><a href="{% url 'welcome' %}" class="nav-link"><i class="mdi mdi-power"></i></a></li>
+							<li class="nav-item"><a href="{% url 'homeapp:welcome' %}" class="nav-link"><i class="mdi mdi-power"></i></a></li>
 						</ul>
 					</div>
 				</div>

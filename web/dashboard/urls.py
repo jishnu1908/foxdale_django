@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from . import views
+app_name='dashapp'
 
 urlpatterns = [
     path('greet/', views.greet, name='greet'),
@@ -24,5 +25,8 @@ urlpatterns = [
     path('dash_form/', views.dash_form, name='dash_form'),
     path('dash_index/', views.dash_index, name='dash_index'),
     path('dash_table/', views.dash_table, name='dash_table'),
-    path('dash_login/', views.dash_login, name='dash_login')
+    path('dash_login/', views.dash_login, name='dash_login'),
+    path('add_product', views.add_product, name='add_product'),
+    path('update_product', views.update_product, name='update_product'),
+
 ]

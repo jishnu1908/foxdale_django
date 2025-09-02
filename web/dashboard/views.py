@@ -22,3 +22,15 @@ def dash_table(request):
 
 def dash_login(request):
     return render(request, 'dash_login.html')
+
+
+def add_product(request):
+    
+
+    return render(request, 'table.html')
+
+
+def update_product(request):
+
+
+    return render(request, 'table.html')
