@@ -79,7 +79,7 @@
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
       <div class="m-2">
-        <a href="{% url 'homeapp:login' %}" class=" btn btn-outline-primary">Login</a>
+        <a href="{% url 'accounts:login' %}" class=" btn btn-outline-primary">Login</a>
       </div>
       <div class="me-2 m-1">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="25" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
@@ -123,77 +123,19 @@
 <!-- Products card -->
 <div class="container mt-3 shadow-lg">
   <div class="row">
+    {% for x in data %}
     <div class="col-lg-4 p-5">
       <div class="card" style="width: 18rem;">
-        <img src="{% static 'img/chawak bazar/1.webp' %}" class="card-img-top" alt="...">
+        <img src="{{x.image.url}}" class="card-img-top" alt="Nil">
         <div class="card-body">
-          <h5 class="card-title">Adidas Shoes Black</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-          <p> 45$ <span class="text-secondary"><strike>55$</strike></span></p>
-          <a href="#" class="btn btn-success">Buy Now</a>
+          <h5 class="card-title">{{x.title}}</h5>
+          <p class="card-text">{{x.desc}}</p>
+          <p> {{x.price}}$ <span class="text-secondary"><strike>{{x.compare_price}}$</strike></span></p>
+          <a href="{% url 'homeapp:product_info' x.id %}" class="btn btn-success">Buy Now</a>
         </div>
       </div>
     </div>
-
-    <div class="col-lg-4 p-5">
-      <div class="card" style="width: 18rem;">
-        <img src="{% static 'img/chawak bazar/2.webp' %}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-          <p> 45$ <span class="text-secondary"><strike>55$</strike></span></p>
-          <a href="#" class="btn btn-success">Buy Now</a>
-        </div>
-      </div>
-  </div>
-
-    <div class="col-lg-4 p-5">
-      <div class="card" style="width: 18rem;">
-        <img src="{% static 'img/chawak bazar/7.webp' %}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-          <p> 45$ <span class="text-secondary"><strike>55$</strike></span></p>
-          <a href="#" class="btn btn-success">Buy Now</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-lg-4 p-5">
-      <div class="card" style="width: 18rem;">
-        <img src="{% static 'img/chawak bazar/4.png' %}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-          <p> 45$ <span class="text-secondary"><strike>55$</strike></span></p>
-          <a href="#" class="btn btn-success">Buy Now</a>
-        </div>
-      </div>
-    </div>
-  
-    <div class="col-lg-4 p-5">
-      <div class="card" style="width: 18rem;">
-        <img src="{% static 'img/chawak bazar/5.webp' %}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-          <p> 45$ <span class="text-secondary"><strike>55$</strike></span></p>
-          <a href="#" class="btn btn-success">Buy Now</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-lg-4 p-5">
-      <div class="card" style="width: 18rem;">
-        <img src="{% static 'img/chawak bazar/6.webp' %}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-          <p> 45$ <span class="text-secondary"><strike>55$</strike></span></p>
-          <a href="#" class="btn btn-success">Buy Now</a>
-        </div>
-      </div>
-    </div>
+    {% endfor %}
   </div>
 </div>
 <!-- Carousel -->

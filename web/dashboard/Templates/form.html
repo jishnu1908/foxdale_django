@@ -6,6 +6,8 @@
 	<title>Form | Simple Admin</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="stylesheet" type="text/css" href="{% static 'vendors/bootstrap/css/bootstrap-4.3.1/bootstrap.min.css' %}">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 	<link rel="stylesheet" type="text/css" href="{% static 'css\simple-custom.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'vendors/icon/mdi/css/materialdesignicons.min.css' %}">
 </head>
@@ -62,39 +64,49 @@
 						<div class="col-md-6">
 							<div class="card">
 								<div class="card-body">
-									<label class="title-body">Basic Form</label>
-									<div class="form-group">
-										<label for="name-b">Name</label>
-										<input type="text" class="form-control" name="name" id="name-b" placeholder="Alexsander Bambam">
-									</div>
-									<div class="form-group">
-										<label for="email-b">Email</label>
-										<input type="text" class="form-control" name="name" id="email-b" placeholder="bambam@alex.io">
-									</div>
-									<div class="form-group">
-										<label for="name">Gender</label>
-										<div class="d-flex radio-b">
-											<label for="gender-m">
-												<input type="radio" class="radio-input" name="gender" id="gender-m"><label class="rc-label" for="gender-m"></label> Male
-											</label>
-											<label for="gender-f" class="ml-5">
-												<input type="radio" class="radio-input" name="gender" id="gender-f"><label class="rc-label" for="gender-f"></label> Female
+									<label class="title-body">Create Employee</label>
+									<form method="post" enctype="multipart/form-data" action="{% url 'dashapp:create_user' %}">
+										{% csrf_token %}
+										<div class="form-group">
+											<label for="name-b">Name</label>
+											<input type="text" class="form-control" name="Name" id="name-b" placeholder="Alexsander Bambam">
+										</div>
+										<div class="form-group">
+											<label for="email-b">Email</label>
+											<input type="text" class="form-control" name="Email" id="email-b" placeholder="bambam@alex.io">
+										</div>
+										<div class="form-group" >
+											<label>Gender: </label>
+											<select name="Gender" class="form-select">
+												<option value="Female">Female</option>
+												<option value="Male">Male</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label for="address-b">Address</label>
+											<textarea class="form-control" id="address-b" name="Address" placeholder="Wall St."></textarea>
+										</div>
+										<div class="form-group">
+											<label for="accept-b">
+												<input type="checkbox" class="checkbox-input" name="accept" id="accept-b"><label class="rc-label"></label> You accept with our <a href="">Terms of Service</a> and <a href="">Privacy Policy</a>
 											</label>
 										</div>
-									</div>
-									<div class="form-group">
-										<label for="address-b">Address</label>
-										<textarea class="form-control" id="address-b" placeholder="Wall St."></textarea>
-									</div>
-									<div class="form-group">
-										<label for="accept-b">
-											<input type="checkbox" class="checkbox-input" name="accept" id="accept-b"><label class="rc-label"></label> You accept with our <a href="">Terms of Service</a> and <a href="">Privacy Policy</a>
-										</label>
-									</div>
-									<button class="btn btn-water-mid">Submit</button>
-									<button class="btn btn-secondary">Cancel</button>
+										<button class="btn btn-water-mid" type="submit">Submit</button>
+										<button class="btn btn-secondary" type="reset">Cancel</button>
+									</form>
 								</div>
 							</div>
+								{% for msg in messages %}
+								<div class="alert {% if 'successful' in msg|lower %} alert-success {% else %} alert-danger {% endif %} mt-2" role="alert">
+									{{msg}}
+									<script>
+										function autorefresh(){
+											window.location.reload();
+										}
+										setInterval(autorefresh, 2000)
+									</script>
+								</div>
+								{% endfor %}
 						</div>
 					</div>
 				</div>

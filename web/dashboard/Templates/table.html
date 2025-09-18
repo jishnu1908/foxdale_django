@@ -54,17 +54,17 @@
 			<main class="col-md-9 col-lg-10" role="main">
 				<div class="container">
 					<div class="content-header mt-2 mb-3">
-						<h2 class="text-header">Data Table</h2>
+						<h2 class="text-header">Product Table</h2>
 					</div>
-					<!-- <div class="alert alert-danger">
+					<div class="alert alert-danger">
 						This template is under maintenance!
-					</div> -->
+					</div>
 					<div class="row basic">
 						<div class="col-md-12 mb-3">
 							<div class="card">
 								<div class="card-body pb-0">
-									<label class="title-body">Basic Table</label>
-									<button class="btn btn-success btn-sm m-2 mb-3 float-right" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1" data-bs-whatever="@mdo" data-bs-target="#staticBackdrop">Add Product</button>
+									<label class="title-body">Product Info</label>
+									<button class="btn btn-success btn-sm m-2 mb-3 float-right" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalj" data-bs-whatever="@mdo" data-bs-target="#staticBackdrop">Add Product</button>
 									<div class="table-responsive">
 										<table class="table">
 											<thead>
@@ -75,52 +75,41 @@
 													<th>Price</th>
 													<th>Size</th>
 													<th>Colour</th>
-													<th>Action</th>
+													<th>File</th>
+													<th>Compare Price</th>
 												</tr>
 											</thead>
 											<tbody>
+												{% for x in data %}
 												<tr>
-													<td>1</td>
-													<td>Shoe</td>
-													<td>Gilfoyle</td>
-													<td>200$</td>
-													<td>Brokln St.</td>
-													<th><span class="status-success">Success</span></th>
-													<td><button class="btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Update</button></td>
+													<td>{{x.id}}</td>
+													<td>{{x.title}}</td>
+													<td>{{x.desc}}</td>
+													<td>{{x.price}}</td>
+													<td>{{x.size}}</td>
+													<td>{{x.color}}</td>
+													<th>{{x.image}}</th>
+													<th>{{x.compare_price}}</th>
+													<td><button class="btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{x.id}}" data-bs-whatever="@mdo">Update</button></td>
 												</tr>
-												<tr>
-													<td>2</td>
-													<td>Shoe</td>
-													<td>Richard</td>
-													<td>300$</td>
-													<td>Palo Alto St.</td>
-													<th><span class="status-danger">Danger</span></th>
-													<td><button class="btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Update</button></td>
-												</tr>
-												<tr>
-													<td>3</td>
-													<td>Shoe</td>
-													<td>Simon</td>
-													<td>210$</td>
-													<td>Borobudur St.</td>
-													<th><span class="status-info">info</span></th>
-													<td><button class="btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Update</button></td>
-												</tr>
-												<tr>
-													<td>4</td>
-													<td>Shoe</td>
-													<td>Maddox</td>
-													<td>2100$</td>
-													<td>Sudirman St.</td>
-													<th><span class="status-disabled">Disbaled</span></th>
-													<td><button class="btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" data-bs-target="#staticBackdrop">Update</button></td>
-												</tr>
+												{% endfor %}
 											</tbody>
 										</table>
 									</div>
 								</div>
 							</div>
 						</div>
+						{% for msg in messages %}
+							<div class="alert {% if 'added' in msg|lower %} alert-success {% elif 'product updated' in msg|lower %} alert-primary {% else %} alert-danger {% endif %}" role="alert" id="alertstyle">	
+								<p>{{msg}}</p>
+							</div>
+							<script>
+									function setrefresh(){
+										window.location.reload();
+									}
+									setInterval(setrefresh, 2000);
+							</script>
+						{% endfor %}
 					</div>
 				</div>
 			</main>
@@ -129,10 +118,12 @@
 
 <!-- Modal update -->
 
+{% for y in data %}
+
 <div>
 	<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Open modal for @mdo</button> -->
 
-	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" aria-labelledby="staticBackdropLabel">
+	<div class="modal fade" id="exampleModal{{y.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" aria-labelledby="staticBackdropLabel">
 		<div class="modal-dialog modal-dialog-scrollable">
 			<div class="modal-content">
 			<div class="modal-header">
@@ -140,27 +131,35 @@
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
-				<form method="post" action="{% url 'dashapp:update_product' %}" enctype="multipart/form-data">
+				<form method="post" action="{% url 'dashapp:update_product' y.id %}" enctype="multipart/form-data">
+					{% csrf_token %}
 				<div class="mb-3">
 					<label for="recipient-name" class="col-form-label">Title:</label>
-					<input type="text" class="form-control" id="recipient-name" name="update_name">
+					<input type="text" class="form-control" id="recipient-name" name="update_name" value='{{y.title}}'>
 				</div>
 				<div class="mb-3">
 					<label for="message-text" class="col-form-label">Description:</label>
-					<textarea class="form-control" id="message-text" name="update_desc"></textarea>
+					<textarea class="form-control" id="message-text" name="update_desc">{{y.desc}}</textarea>
 				</div>
 				<div class="mb-3">
 					<label for="message-text" class="col-form-label">Price:</label>
-					<input type="number" class="form-control" id="price" name="update_price">
+					<input type="number" class="form-control" id="price" name="update_price" value="{{y.price}}">
 				</div>
+				
+				<div class="mb-3">
+					<label for="message-text" class="col-form-label">Compare Price:</label>
+					<input type="number" class="form-control" id="price" name="update_price" value="{{y.compare_price}}">
+				</div>
+
 				<div class="mb-3">
 					<label for="message-text" class="col-form-label">Size:</label>
-					<input type="number" class="form-control" id="Size" name="update_size">
+					<input type="number" class="form-control" id="Size" name="update_size" value="{{y.size}}">
 				</div>
 
 				<div class="mb-3 dropdown">
 					<label for="message-text" class="col-form-label">Colour:</label>
 					<select class="form-select w-25" aria-label="Default select example" name="update_colour">
+					<option class="active" value="{{y.color}}">{{y.color}}</option>	
 					<option value="Red">Red</option>
 					<option value="Green">Green</option>
 					<option value="White">White</option>
@@ -170,26 +169,27 @@
 
 				<div class="mb-3">
 					<label for="message-text" class="col-form-label">Image:</label>
-					<input type="file" accept="" class="form-control" id="image">
+					<input type="file" accept="" class="form-control" id="image" name="update_image">
 				</div>
-				</form>
+				<!-- </form> -->
 			</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Update</button>
+					<button type="submit" class="btn btn-primary">Update</button>
 				</div>
+				</form>
 			</div>
 		</div>
 	</div>
 </div>
-
+{% endfor %}
 
 <!-- Modal Add -->
 
 <div>
 	<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Open modal for @mdo</button> -->
 
-	<div class="modal fade" id="exampleModal1" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	<div class="modal fade" id="exampleModalj" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-scrollable">
 			<div class="modal-content">
 			<div class="modal-header">
@@ -198,6 +198,7 @@
 			</div>
 			<div class="modal-body">
 				<form method="post" action="{% url 'dashapp:add_product' %}" enctype="multipart/form-data" >
+					{% csrf_token %}
 					<div class="mb-3">
 						<label for="recipient-name" class="col-form-label">Title:</label>
 						<input type="text" class="form-control" id="recipient-name" name="add_name">
@@ -208,8 +209,14 @@
 					</div>
 					<div class="mb-3">
 						<label for="message-text" class="col-form-label">Price:</label>
-						<input type="number" class="form-control" id="price" name="add_number">
+						<input type="number" class="form-control" id="price" name="add_price">
 					</div>
+
+					<div class="mb-3">
+						<label for="message-text" class="col-form-label">Compare Price:</label>
+						<input type="number" class="form-control" id="price" name="add_compare_price">
+					</div>
+
 					<div class="mb-3">
 						<label for="message-text" class="col-form-label">Size:</label>
 						<input type="number" class="form-control" id="Size" name="add_size">
@@ -227,12 +234,12 @@
 						<label for="message-text" class="col-form-label">Image:</label>
 						<input type="file" accept="" class="form-control" id="image" name="add_image">
 					</div>
-				</form>
 			</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Add</button>
-				</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-primary">Add Product</button>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>

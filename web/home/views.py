@@ -1,14 +1,13 @@
 from django.shortcuts import render, HttpResponse
+from dashboard.models import *
 
 # Create your views here.
 
 def welcome(request):
-    return render(request, 'index.html')
+    fetchdata = product.objects.all
+    return render(request, 'index.html', {'data': fetchdata})
 
 
-def login_page(request):
-    return render(request, 'login.html')
-
-
-def register(request):
-    return render(request, 'register.html')
+def product_info(request, p_id):
+    fetch_product = product.objects.filter(id=p_id)
+    return render(request, 'productinfo.html', {'data':fetch_product})

@@ -17,10 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from . import views
+from django.conf import settings 
+from  django.conf.urls.static import static
 app_name='homeapp'
 
 urlpatterns = [
     path('',views.welcome, name='welcome'),
-    path('Login/', views.login_page, name='login'),
-    path('register/', views.register, name='register')
-]
+    path('product_info/<int:p_id>', views.product_info, name='product_info')
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

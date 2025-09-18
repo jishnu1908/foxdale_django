@@ -27,6 +27,7 @@ urlpatterns = [
     path('dash_table/', views.dash_table, name='dash_table'),
     path('dash_login/', views.dash_login, name='dash_login'),
     path('add_product', views.add_product, name='add_product'),
-    path('update_product', views.update_product, name='update_product'),
+    path('update_product/<int:p_id>', views.update_product, name='update_product'),
+    path('create_user/', views.create_user, name='create_user')
 
 ]
