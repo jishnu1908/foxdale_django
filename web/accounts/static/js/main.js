@@ -1,9 +1,9 @@
 
 function verify() {
-    let y = document.getElementById('inputname').value;
+    let y = document.getElementById('inputusername').value;
 
-    if (y.length <= 8) {
-        window.alert('Username must be longer than 8 characters');
+    if (y.length <= 5) {
+        window.alert('Username must be longer than 5 characters');
         return false;
     }
     

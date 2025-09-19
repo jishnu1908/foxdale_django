@@ -11,3 +11,7 @@ def welcome(request):
 def product_info(request, p_id):
     fetch_product = product.objects.filter(id=p_id)
     return render(request, 'productinfo.html', {'data':fetch_product})
+
+
+def cart(request):
+    return render(request, 'cart.html')

@@ -23,5 +23,6 @@ app_name='homeapp'
 
 urlpatterns = [
     path('',views.welcome, name='welcome'),
-    path('product_info/<int:p_id>', views.product_info, name='product_info')
+    path('product_info/<int:p_id>', views.product_info, name='product_info'),
+    path('cart/', views.cart, name='cart')
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

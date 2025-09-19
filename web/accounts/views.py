@@ -1,7 +1,8 @@
 from django.shortcuts import render, HttpResponse,redirect
 from .models import *
 from django.contrib import messages
-
+from django.contrib.auth.models import User
+from django.contrib.auth import login,logout as auth_logout,authenticate
 # Create your views here.
 
 
@@ -15,11 +16,13 @@ def register(request):
 def create_user(request):
     if request.method == 'POST':
         name = request.POST['Name']
+        username = request.POST['username']
         email = request.POST.get('Email')
         password = request.POST.get('Password')
         conf_pass = request.POST.get('Conf_pass')
         # if user_auth.objects.filter(Email=email).exists():
-        save_dat = user_auth(Name = name, Email=email, Password=password)
+        # save_dat = user_auth(Name = name, Email=email, Password=password)
+        
         if name == '' or email == '' or password == '':
            messages.error(request,'All fields are Mandatory')
            error1 = ' All fields are Mandatory'
@@ -28,7 +31,8 @@ def create_user(request):
             error2 = 'Password must match'
 
         else:
-            save_dat.save()
+            # save_dat.save()
+            User.objects.create(username = username, email=email, password=password, first_name=name)
             # return redirect(login_page)
             return redirect('accounts:login')
         
@@ -38,10 +42,21 @@ def create_user(request):
 
 def user_login(request):
     if request.method == 'POST':
-        Email = request.POST.get('Email')
+        Username = request.POST.get('Username')
         Password = request.POST.get('Password')
-        if user_auth.objects.filter(Email = Email, Password=Password).exists():
+        print(Username,Password,'ppppppppppppppppppppppppppppppp')
+        # if user_auth.objects.filter(Email = Email, Password=Password).exists():
+        #     return redirect('homeapp:welcome')
+        # else:
+        #     return HttpResponse('<h1>Login Failed</h1>')
+        user1= User.objects.get(username=Username,password=Password)
+        print(user1,'iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii')
+        if user1:
+            login(request, user1)
             return redirect('homeapp:welcome')
-        else:
-            return HttpResponse('<h1>Login Failed</h1>')
     return render(request, 'login.html')
+
+
+def log_out(request):
+    auth_logout(request)
+    return redirect('homeapp:welcome')

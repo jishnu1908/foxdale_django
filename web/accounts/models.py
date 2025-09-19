@@ -8,3 +8,5 @@ class user_auth(models.Model):
     Password = models.TextField(max_length=20)
     Date = models.DateTimeField(auto_now=True)
     Active = models.BooleanField(default=True)
+
+
