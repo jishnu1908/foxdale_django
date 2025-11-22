@@ -8,3 +8,7 @@ class Mycart(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE, blank=True, null=True)
     quantity = models.IntegerField(blank=True, null=True)
     coupon_code = models.CharField(max_length=5, blank=True, null=True)
+
+
+
+    
